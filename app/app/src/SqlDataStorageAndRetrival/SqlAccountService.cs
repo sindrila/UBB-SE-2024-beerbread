@@ -1,4 +1,5 @@
-﻿using System;
+﻿using app.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Diagnostics;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace app.src.SqlDataStorageAndRetrival
 {
-    public class SqlAccountService
+    public class SqlAccountService :ISqlAccountService
     {
         private List<Account> accounts = [];
         Microsoft.Data.SqlClient.SqlConnection sqlconnection;

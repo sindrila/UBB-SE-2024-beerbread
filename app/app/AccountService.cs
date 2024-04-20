@@ -3,15 +3,21 @@ using System.Collections.Generic;
 using System.Text;
 using System.Security.Cryptography;
 using app.src.SqlDataStorageAndRetrival;
+using app.Interfaces;
 
 namespace app
 {
     public class AccountService: Interfaces.IAccountService
     {
-        private readonly SqlAccountService sqlAccountService = new();
+        private readonly ISqlAccountService sqlAccountService ;
 
+        public AccountService(ISqlAccountService sqlAccountService)
+        {
+            this.sqlAccountService = sqlAccountService;
+        }   
         public AccountService()
         {
+            this.sqlAccountService = new SqlAccountService();
         }
 
         // Creation
