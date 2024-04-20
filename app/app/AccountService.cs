@@ -8,10 +8,15 @@ namespace app
 {
     public class AccountService: Interfaces.IAccountService
     {
-        private readonly SqlAccountService sqlAccountService = new();
 
+        private readonly SqlAccountService sqlAccountService;
         public AccountService()
         {
+            this.sqlAccountService = new SqlAccountService();
+        }
+        public AccountService(SqlAccountService sqlAccountService)
+        {
+            this.sqlAccountService = sqlAccountService ?? throw new ArgumentNullException(nameof(sqlAccountService));
         }
 
         // Creation
