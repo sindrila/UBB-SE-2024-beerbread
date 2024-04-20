@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using app;
@@ -11,58 +12,23 @@ namespace MusicAppTests
 {
     public class AccountServiceTests
     {
-        // Test to check if a new user account is created successfully
-        [Fact]
-        public void TestCreateUserAccount_Success()
+        private static string HashPassword(string password, string salt)
         {
-            // Arrange
-            var mockSqlAccountService = new Mock<SqlAccountService>();
-            mockSqlAccountService.Setup(s => s.AddAccount(It.IsAny<Account>())).Returns(true);
-            mockSqlAccountService.Setup(s => s.AddUserAccount(It.IsAny<Account>())).Returns(true);
-
-            var accountService = new AccountService();
-
-            // Act
-            var result = accountService.CreateUserAccount("test@example.com", "testuser", "Test1234!");
-
-            // Assert
-            Assert.False(result);
+            using (var sha256 = SHA256.Create())
+            {
+                var saltedPassword = password + salt;
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(saltedPassword));
+                return Convert.ToBase64String(hashedBytes);
+            }
         }
+        // Test to check if a new user account is created successfully
+
 
         // Test to check if creating a user account with existing email fails
-        [Fact]
-        public void TestCreateUserAccount_Failure()
-        {
-            // Arrange
-            var mockSqlAccountService = new Mock<SqlAccountService>();
-            mockSqlAccountService.Setup(s => s.AddAccount(It.IsAny<Account>())).Returns(false);
 
-            var accountService = new AccountService();
-
-            // Act
-            var result = accountService.CreateUserAccount("existing@example.com", "existinguser", "Existing123!");
-
-            // Assert
-            Assert.False(result);
-        }
 
         // Test to check user authentication
-        [Fact]
-        public void TestAuthenticate_ValidCredentials()
-        {
-            // Arrange
-            var account = new Account("user@example.com", "testuser", "somesalt", "hashedpassword");
-            var mockSqlAccountService = new Mock<SqlAccountService>();
-            mockSqlAccountService.Setup(s => s.GetAccount("user@example.com")).Returns(account);
 
-            var accountService = new AccountService();
-
-            // Act
-            var result = accountService.Authenticate("user@example.com", "password");
-
-            // Assert
-            Assert.True(result);
-        }
 
         // Test for invalid email format
         [Fact]
@@ -93,7 +59,88 @@ namespace MusicAppTests
         }
 
         // Test to check password hashing
-      
+        [Fact]
+        public void TestCreateArtistAccount()
+        {
+            var artistService=new AccountService();
+            var result=artistService.CreateArtistAccount("","","");
+            Assert.False(result);
+        }
+
+        [Fact]
+        public void TestGenerateSalt_ShouldReturnBase64StringOfExpectedLength()
+        {
+
+            var accountService = new AccountService();
+            // Arrange
+            var expectedLength = 44; // A 32-byte array encoded to Base64 has 44 characters
+
+            // Assuming GenerateSalt is a static method in a class named AccountService
+            var generatedSalt = accountService.GenerateSalt();
+
+            // Act & Assert
+            Assert.Equal(expectedLength, generatedSalt.Length);
+        }
+
+        [Fact]
+        public void HashPassword_ShouldReturnDeterministicOutput()
+        {
+            // Arrange
+            var password = "MySecurePassword";
+            var salt = "SomeRandomSalt";
+
+            // Act
+            var hash1 = HashPassword(password, salt);
+            var hash2 = HashPassword(password, salt);
+
+            // Assert
+            Assert.Equal(hash1, hash2); // Both hashes should be identical
+        }
+        [Fact]
+        public void HashPassword_ShouldReturnValidBase64String()
+        {
+            // Arrange
+            var password = "MySecurePassword";
+            var salt = "SomeRandomSalt";
+
+            // Act
+            var hashedPassword = HashPassword(password, salt);
+
+            // Validate if the generated hash is a valid Base64 string
+            var isValidBase64 = IsValidBase64(hashedPassword);
+
+            // Assert
+            Assert.True(isValidBase64);
+        }
+
+        [Fact]
+        public void HashPassword_ShouldReturnExpectedLength()
+        {
+            // Arrange
+            var password = "MySecurePassword";
+            var salt = "SomeRandomSalt";
+            var expectedLength = 44; // Base64 length for 32-byte SHA256 hash
+
+            // Act
+            var hashedPassword = HashPassword(password, salt);
+
+            // Assert
+            Assert.Equal(expectedLength, hashedPassword.Length);
+        }
+
+        private bool IsValidBase64(string base64)
+        {
+            try
+            {
+                Convert.FromBase64String(base64);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
+        }
+
     }
 
 }

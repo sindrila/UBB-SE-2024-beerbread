@@ -48,7 +48,7 @@ namespace app
         }
 
         // Salt generator
-        private string GenerateSalt()
+        public string GenerateSalt()
         {
             byte[] saltBytes = new byte[32];
             using (var rng = System.Security.Cryptography.RandomNumberGenerator.Create())
