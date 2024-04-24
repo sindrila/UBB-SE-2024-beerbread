@@ -10,7 +10,6 @@
         List<IPlaylist> GetUserPlaylists(Guid userGuid);
 
         bool AddPlaylist(IPlaylist playlist, Guid userGuid);
-
     }
 
     public class SqlPlaylistRepository : ISqlPlaylistRepository
@@ -19,7 +18,7 @@
 
         public SqlPlaylistRepository()
         {
-            sqlPlaylistTableCommandExecutor = new SqlPlaylistTableCommandExecutor();
+            this.sqlPlaylistTableCommandExecutor = new SqlPlaylistTableCommandExecutor();
         }
 
         public SqlPlaylistRepository(ISqlPlaylistTableCommandExecutor sqlPlaylistTableCommandExecutor)
@@ -29,10 +28,10 @@
 
         public List<IPlaylist> GetUserPlaylists(Guid userGuid)
         {
-            List<IPlaylist> userPlaylists = sqlPlaylistTableCommandExecutor.GetUserPlaylistIdsWithGuid(userGuid);
+            List<IPlaylist> userPlaylists = this.sqlPlaylistTableCommandExecutor.GetUserPlaylistIdsWithGuid(userGuid);
             foreach (IPlaylist playlist in userPlaylists)
             {
-                string topSongImagePath = sqlPlaylistTableCommandExecutor.GetImagePathForTopSongInPlaylistWithId(playlist.Id);
+                string topSongImagePath = this.sqlPlaylistTableCommandExecutor.GetImagePathForTopSongInPlaylistWithId(playlist.Id);
                 playlist.ImagePath = topSongImagePath;
             }
 
@@ -41,7 +40,7 @@
 
         public bool AddPlaylist(IPlaylist playlist, Guid userGuid)
         {
-            return sqlPlaylistTableCommandExecutor.ExecuteInsertPlaylistNonQueryCommand(userGuid.ToString(), playlist.Name, playlist.IsPrivate ? 1 : 0);
+            return this.sqlPlaylistTableCommandExecutor.ExecuteInsertPlaylistNonQueryCommand(userGuid.ToString(), playlist.Name, playlist.IsPrivate ? 1 : 0);
         }
     }
 }

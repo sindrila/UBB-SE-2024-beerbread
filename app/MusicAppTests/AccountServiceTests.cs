@@ -25,7 +25,7 @@ namespace MusicAppTests
         public void GetAccountWithCredentials_EmptyEmail_ReturnsNull()
         {
             // Act
-            User result = accountService.GetAccountWithCredentials("", "SecurePassword123");
+            User result = this.accountService.GetAccountWithCredentials("", "SecurePassword123");
 
             // Assert
             Assert.Null(result); // Should return null with empty email
@@ -35,7 +35,7 @@ namespace MusicAppTests
         public void GetAccountWithCredentials_WhitespaceOnlyEmail_ReturnsNull()
         {
             // Act
-            User result = accountService.GetAccountWithCredentials("   ", "SecurePassword123");
+            User result = this.accountService.GetAccountWithCredentials("   ", "SecurePassword123");
 
             // Assert
             Assert.Null(result); // Should return null with whitespace-only email
@@ -54,8 +54,8 @@ namespace MusicAppTests
             mockRepository.Setup(repo => repo.GetAccount(email)).Returns(account);
 
             // Act
-            User firstResult = accountService.GetAccountWithCredentials(email, password);
-            User secondResult = accountService.GetAccountWithCredentials(email, password);
+            User firstResult = this.accountService.GetAccountWithCredentials(email, password);
+            User secondResult = this.accountService.GetAccountWithCredentials(email, password);
 
             // Assert
             Assert.NotNull(firstResult);

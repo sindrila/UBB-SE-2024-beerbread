@@ -50,7 +50,7 @@ namespace MusicAppTests
             // Arrange
             Guid userGuid = Guid.NewGuid();
             var mockCommandExecutor = new Mock<ISqlPlaylistTableCommandExecutor>();
-            mockCommandExecutor.Setup(e => e.ExecuteInsertPlaylistNonQueryCommand(userGuid.ToString(), "Test Playlist", 1)).Returns(true);
+            mockCommandExecutor.Setup(e => e.ExecuteInsertPlaylistNonQueryCommand(userGuid.ToString(), "Test Playlist", 0)).Returns(true);
             var playlistRepository = new SqlPlaylistRepository(mockCommandExecutor.Object);
             var playlist = new Playlist(1, 1, "Test Playlist");
 

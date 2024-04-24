@@ -45,7 +45,7 @@
                     CornerRadius = 10,
                     HeightRequest = 60,
                     WidthRequest = 60,
-                    BackgroundColor = Color.FromArgb("#FFFFFFFF")
+                    BackgroundColor = Color.FromArgb("#FFFFFFFF"),
                 };
                 string imgPath = playlist.ImagePath;
                 if (imgPath != "")
@@ -69,7 +69,7 @@
                     TextColor = Color.FromArgb("#FFFFFFFF"),
                     FontFamily = "NunitoSans",
                     FontAttributes = FontAttributes.Bold,
-                    WidthRequest = 200
+                    WidthRequest = 200,
                 };
                 stackLayout.Children.Add(label);
 
@@ -84,7 +84,7 @@
                     Margin = new Thickness(30, 0, 0, 0),
                     HorizontalOptions = LayoutOptions.End,
                     VerticalOptions = LayoutOptions.Center,
-                    IsClippedToBounds = true
+                    IsClippedToBounds = true,
                 };
                 Image details = new Image
                 {
@@ -92,7 +92,7 @@
                     Aspect = Aspect.AspectFit,
                     Margin = new Thickness(-20, 0, 0, 0),
                     HeightRequest = 40,
-                    WidthRequest = 20
+                    WidthRequest = 20,
                 };
                 buttonFrame.Content = details;
                 TapGestureRecognizer tap_fn_img = new();

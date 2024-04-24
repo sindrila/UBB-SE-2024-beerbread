@@ -19,7 +19,7 @@ namespace MusicAppTests
         public LoginViewModelTests()
         {
             mockAccountService = new Mock<IAccountService>();
-            loginViewModel = new LoginViewModel(mockAccountService.Object);
+            loginViewModel = new LoginViewModel(this.mockAccountService.Object);
         }
         // Test default constructor
         [Fact]
@@ -38,8 +38,8 @@ namespace MusicAppTests
         {
             var loginViewModel = new LoginViewModel();
             var mockAccountService = new Mock<IAccountService>();
-            loginViewModel.AccountService = mockAccountService.Object;
-            Assert.Equal(mockAccountService.Object, loginViewModel.AccountService); 
+            this.loginViewModel.AccountService = this.mockAccountService.Object;
+            Assert.Equal(this.mockAccountService.Object, this.loginViewModel.AccountService); 
         }
         // Test getting AccountService after setting it
         [Fact]
@@ -47,16 +47,16 @@ namespace MusicAppTests
         {
             var loginViewModel = new LoginViewModel();
             var mockAccountService = new Mock<IAccountService>();
-            loginViewModel.AccountService = mockAccountService.Object; 
-            var accountService = loginViewModel.AccountService;
-            Assert.Equal(mockAccountService.Object, accountService); 
+            this.loginViewModel.AccountService = this.mockAccountService.Object; 
+            var accountService = this.loginViewModel.AccountService;
+            Assert.Equal(this.mockAccountService.Object, accountService); 
         }
         // Test default AccountService value
         [Fact]
         public void AccountService_DefaultConstructor_IsNull()
         { 
             var loginViewModel = new LoginViewModel();
-            var accountService = loginViewModel.AccountService;
+            var accountService = this.loginViewModel.AccountService;
             Assert.Null(accountService); 
         }
         // Test for valid email format
@@ -64,8 +64,8 @@ namespace MusicAppTests
         public void IsEmailValid_ValidEmail_ReturnsTrue()
         {
             string validEmail = "user@example.com";
-            mockAccountService.Setup(service => service.IsEmailValid(validEmail)).Returns(true);
-            bool result = loginViewModel.IsEmailValid(validEmail);
+            this.mockAccountService.Setup(service => service.IsEmailValid(validEmail)).Returns(true);
+            bool result = this.loginViewModel.IsEmailValid(validEmail);
             Assert.True(result); 
         }
         // Test for invalid email format
@@ -73,22 +73,22 @@ namespace MusicAppTests
         public void IsEmailValid_InvalidEmail_ReturnsFalse()
         {
             string invalidEmail = "invalid-email";
-            mockAccountService.Setup(service => service.IsEmailValid(invalidEmail)).Returns(false);
-            bool result = loginViewModel.IsEmailValid(invalidEmail);
+            this.mockAccountService.Setup(service => service.IsEmailValid(invalidEmail)).Returns(false);
+            bool result = this.loginViewModel.IsEmailValid(invalidEmail);
             Assert.False(result); 
         }
         // Test for null email
         [Fact]
         public void IsEmailValid_NullEmail_ReturnsFalse()
         {
-            bool result = loginViewModel.IsEmailValid(null);
+            bool result = this.loginViewModel.IsEmailValid(null);
             Assert.False(result); 
         }
         // Test for empty email
         [Fact]
         public void IsEmailValid_EmptyEmail_ReturnsFalse()
         {
-            bool result = loginViewModel.IsEmailValid("");
+            bool result = this.loginViewModel.IsEmailValid("");
             Assert.False(result); 
         }
         // Test for valid password
@@ -96,7 +96,7 @@ namespace MusicAppTests
         public void IsPasswordValid_ValidPassword_ReturnsTrue()
         {
             string validPassword = "SecurePassword123";
-            bool result = loginViewModel.IsPasswordValid(validPassword);
+            bool result = this.loginViewModel.IsPasswordValid(validPassword);
             Assert.True(result); 
         }
         // Test for invalid password (too short)
@@ -104,21 +104,21 @@ namespace MusicAppTests
         public void IsPasswordValid_InvalidPassword_ReturnsFalse()
         {
             string invalidPassword = "12345"; 
-            bool result = loginViewModel.IsPasswordValid(invalidPassword);
+            bool result = this.loginViewModel.IsPasswordValid(invalidPassword);
             Assert.False(result); 
         }
         // Test for null password
         [Fact]
         public void IsPasswordValid_NullPassword_ReturnsFalse()
         {
-            bool result = loginViewModel.IsPasswordValid(null);
+            bool result = this.loginViewModel.IsPasswordValid(null);
             Assert.False(result); 
         }
         // Test for empty password
         [Fact]
         public void IsPasswordValid_EmptyPassword_ReturnsFalse()
         {
-            bool result = loginViewModel.IsPasswordValid("");
+            bool result = this.loginViewModel.IsPasswordValid("");
             Assert.False(result);
         }
         // Test for valid credentials
@@ -127,8 +127,8 @@ namespace MusicAppTests
         {
             string email = "user@example.com";
             string password = "SecurePassword123";
-            mockAccountService.Setup(service => service.AreAuthenticationCredentialsValid(email, password)).Returns(true);
-            bool result = loginViewModel.AreAuthenticationCredentialsValid(email, password);
+            this.mockAccountService.Setup(service => service.AreAuthenticationCredentialsValid(email, password)).Returns(true);
+            bool result = this.loginViewModel.AreAuthenticationCredentialsValid(email, password);
             Assert.True(result); 
         }
         // Test for invalid credentials
@@ -137,8 +137,8 @@ namespace MusicAppTests
         {
             string email = "user@example.com";
             string password = "WrongPassword";
-            mockAccountService.Setup(service => service.AreAuthenticationCredentialsValid(email, password)).Returns(false);
-            bool result = loginViewModel.AreAuthenticationCredentialsValid(email, password);
+            this.mockAccountService.Setup(service => service.AreAuthenticationCredentialsValid(email, password)).Returns(false);
+            bool result = this.loginViewModel.AreAuthenticationCredentialsValid(email, password);
             Assert.False(result); 
         }       
         // Test for failed authentication
@@ -147,8 +147,8 @@ namespace MusicAppTests
         {
             string email = "user@example.com";
             string password = "WrongPassword";
-            mockAccountService.Setup(service => service.GetAccountWithCredentials(email, password)).Returns((User)null);
-            User result = loginViewModel.AuthenticateAndGetCurrentUser(email, password);
+            this.mockAccountService.Setup(service => service.GetAccountWithCredentials(email, password)).Returns((User)null);
+            User result = this.loginViewModel.AuthenticateAndGetCurrentUser(email, password);
             Assert.Null(result); 
         }
     }

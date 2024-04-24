@@ -13,10 +13,8 @@ public partial class StartUpPage : ContentPage
     {
         CreateUserAccount createUserAccount = new CreateUserAccount();
         Navigation.PushAsync(createUserAccount);
-        //SongActions songActions = new SongActions();
-        //Navigation.PushAsync(songActions);
-        
     }
+
     private void onLogInClicked(object sender, EventArgs e)
     {
         src.LogIn logIn = new src.LogIn();

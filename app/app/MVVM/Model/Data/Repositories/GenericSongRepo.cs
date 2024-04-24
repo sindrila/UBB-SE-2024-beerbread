@@ -29,31 +29,31 @@
 
         public GenericSongRepo(int owner, int id, string name)
         {
-            Owner = owner;
-            Id = id;
-            Name = name;
-            Songs = new List<int>();
+            this.Owner = owner;
+            this.Id = id;
+            this.Name = name;
+            this.Songs = [];
         }
 
         public bool AddSong(int songId)
         {
-            if (Songs.Contains(songId))
+            if (this.Songs.Contains(songId))
             {
                 return false;
             }
 
-            Songs.Add(songId);
+            this.Songs.Add(songId);
             return true;
         }
 
         public bool RemoveSong(int songId)
         {
-            return Songs.Remove(songId);
+            return this.Songs.Remove(songId);
         }
 
         public int GetSongsNumber()
         {
-            return Songs.Count;
+            return this.Songs.Count;
         }
     }
 }

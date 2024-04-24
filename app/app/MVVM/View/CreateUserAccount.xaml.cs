@@ -5,7 +5,7 @@
 
     public partial class CreateUserAccount : ContentPage
     {
-        private ICreateUserAccountViewModel createUserAccountViewModel = new CreateUserAccountViewModel();
+        private readonly ICreateUserAccountViewModel createUserAccountViewModel = new CreateUserAccountViewModel();
 
         public CreateUserAccount()
         {
@@ -20,7 +20,7 @@
         private void ArtistButton_Clicked(object sender, EventArgs e)
         {
             // Switch to Artist mode
-            CreateArtistAccount createArtistAccount = new CreateArtistAccount();
+            CreateArtistAccount createArtistAccount = new ();
             this.Navigation.PushAsync(createArtistAccount);
         }
 

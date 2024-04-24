@@ -33,7 +33,7 @@
             try
             {
                 currentSqlConnection.Open();
-                SqlCommand command = new("SELECT * FROM Playlists where owner = (select id from accounts where guid='" + userGuid.ToString() + "')", currentSqlConnection);
+                SqlCommand command = new ("SELECT * FROM Playlists where owner = (select id from accounts where guid='" + userGuid.ToString() + "')", currentSqlConnection);
                 SqlDataReader reader = command.ExecuteReader();
                 while (reader.Read())
                 {

@@ -11,6 +11,13 @@ namespace MusicAppTests
     public class SongServiceTests
     {
         [Fact]
+        public void SongServiceTests_EmptyConstructor()
+        {
+            var songService = new SongServiceTests();
+            Assert.IsType<SongServiceTests>(songService);
+        }
+
+        [Fact]
         public void GetSongsWithIds_ReturnsCorrectSongs()
         {
             // Arrange

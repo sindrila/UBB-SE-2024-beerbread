@@ -1,33 +1,32 @@
-namespace app;
-
-public partial class CreateAccountDefault : ContentPage
+namespace app
 {
-    public CreateAccountDefault()
+    using app.src;
+
+    public partial class CreateAccountDefault : ContentPage
     {
-        InitializeComponent();
+        public CreateAccountDefault()
+        {
+            this.InitializeComponent();
+        }
+
+        private void UserButton_Clicked(object sender, EventArgs e)
+        {
+            // Switch to User mode
+            CreateUserAccount createUserAccount = new ();
+            this.Navigation.PushAsync(createUserAccount);
+        }
+
+        private void ArtistButton_Clicked(object sender, EventArgs e)
+        {
+            // Switch to Artist mode
+            CreateArtistAccount createArtistAccount = new ();
+            this.Navigation.PushAsync(createArtistAccount);
+        }
+
+        private void LoginButton_Clicked(object sender, EventArgs e)
+        {
+            LogIn logIn = new LogIn();
+            this.Navigation.PushAsync(logIn);
+        }
     }
-
-    private void UserButton_Clicked(object sender, EventArgs e)
-    {
-        // Switch to User mode
-        CreateUserAccount createUserAccount = new CreateUserAccount();
-        Navigation.PushAsync(createUserAccount);
-    }
-
-    private void ArtistButton_Clicked(object sender, EventArgs e)
-    {
-        // Switch to Artist mode
-        CreateArtistAccount createArtistAccount = new CreateArtistAccount();
-        Navigation.PushAsync(createArtistAccount);
-    }
-
-    private void LoginButton_Clicked(object sender, EventArgs e)
-    {
-
-        src.LogIn logIn = new src.LogIn();
-        Navigation.PushAsync(logIn);
-
-    }
-
-
 }

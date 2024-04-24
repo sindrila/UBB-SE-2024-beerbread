@@ -16,7 +16,6 @@ namespace app.src.Song_page
         private bool noAutoChange = true;
         private Song song;
 
-
         public string Position
         {
             get
@@ -24,6 +23,7 @@ namespace app.src.Song_page
                 return this.songPageViewModel.VerifyAndGetPosition(mediaElement);
             }
         }
+
         public string Duration
         {
             get
@@ -46,6 +46,7 @@ namespace app.src.Song_page
             songImage.Source = this.songPageViewModel.GetSongImageSource(song);
             songImage.Source = ImageSource.FromUri(new Uri(SongFilesServerPathGenerator.GetPngPath() + song.UrlImage));
         }
+
         private void mediaElement_loaded(object sender, EventArgs e)
         {
             mediaElement.PositionChanged += MediaElement_PositionChanged;
@@ -61,6 +62,7 @@ namespace app.src.Song_page
             OnPropertyChanged(nameof(Position));
             total_song_time.Text = mediaElement.Duration.ToString(@"mm\:ss");
         }
+
         private void onBackButtonTapped(object sender, EventArgs e)
         {
             mediaElement.Stop();
@@ -133,12 +135,10 @@ namespace app.src.Song_page
 
         //}
 
-
         //private void goForwardSongButton(object sender, EventArgs e)
         //{
         //    DisplayAlert("Error", "Not implemented yet..", "OK");
         //    return;
         //}
-
     }
 }

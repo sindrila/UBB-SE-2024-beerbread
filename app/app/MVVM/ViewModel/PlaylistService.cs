@@ -1,13 +1,8 @@
-﻿using app.MVVM.Model.Data.Repositories;
-using app.MVVM.Model.Domain;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace app.MVVM.ViewModel
+﻿namespace app.MVVM.ViewModel
 {
+    using app.MVVM.Model.Data.Repositories;
+    using app.MVVM.Model.Domain;
+
     public class PlaylistService
     {
         private ISqlPlaylistRepository playlistRepository;

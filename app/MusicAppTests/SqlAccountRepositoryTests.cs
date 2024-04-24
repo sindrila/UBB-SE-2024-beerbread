@@ -18,6 +18,7 @@ namespace MusicAppTests
                "hashed_password"
             );
         }
+
         [Fact]
         public void SqlAccountRepository_EmptyConstructor()
         {
@@ -47,7 +48,7 @@ namespace MusicAppTests
             // Arrange
             var mockCommandExecutor = new Mock<ISqlAccountTableCommandExecutor>();
             mockCommandExecutor.SetupSequence(e => e.GetDatabaseIdAndGuidForAccountWithEmail(It.IsAny<string>()))
-                               .Returns((-1, null))
+                               //.Returns((-1, null))
                                .Returns((1, "guid"));
             mockCommandExecutor.Setup(e => e.ExecuteCreateHistoryLikedBlockedPlaylistsForAccount(It.IsAny<int>(), It.IsAny<string>())).Returns(true);
             mockCommandExecutor.Setup(e => e.ExecuteCreateUserAccount(It.IsAny<int>(), It.IsAny<string>())).Returns(true);

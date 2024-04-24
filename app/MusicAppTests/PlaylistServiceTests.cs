@@ -1,27 +1,30 @@
-﻿using Xunit;
-using Moq;
-using app.MVVM.ViewModel;
-using app.MVVM.Model.Domain;
-using System;
-using System.Collections.Generic;
-using app.MVVM.Model.Data.Repositories;
-
-namespace MusicAppTests
+﻿namespace MusicAppTests
 {
+    using Moq;
+    using app.MVVM.ViewModel;
+    using app.MVVM.Model.Domain;
+    using app.MVVM.Model.Data.Repositories;
     public class PlaylistServiceTests
     {
+        [Fact]
+        public void PlaylistServiceTests_EmptyConstructor()
+        {
+            var playlistService = new PlaylistServiceTests();
+            Assert.IsType<PlaylistServiceTests>(playlistService);
+        }
+
         [Fact]
         public void GetUserPlaylists_ReturnsUserPlaylists()
         {
             // Arrange
             var mockRepository = new Mock<ISqlPlaylistRepository>();
             Guid userId = Guid.NewGuid();
-            List<IPlaylist> expectedPlaylists = new List<IPlaylist>
-            {
+            List<IPlaylist> expectedPlaylists =
+            [
                 new Playlist(1, 1, "Playlist 1"),
                 new Playlist(2, 1, "Playlist 2"),
                 new Playlist(3, 1, "Playlist 3")
-            };
+            ];
             mockRepository.Setup(repo => repo.GetUserPlaylists(userId)).Returns(expectedPlaylists);
             var playlistService = new PlaylistService(mockRepository.Object);
 
