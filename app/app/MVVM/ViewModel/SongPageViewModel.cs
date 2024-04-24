@@ -23,7 +23,7 @@
             {
                 return mediaElement.Position.ToString(@"mm\:ss");
             }
-            
+
             return "00:00";
         }
 
