@@ -40,5 +40,49 @@ namespace MusicAppTests
             // Assert
             Assert.Equal(expectedSongs, result);
         }
+        [Fact]
+        public void GetSongsWithIds_WithEmptyList_ReturnsEmptyList()
+        {
+            // Arrange
+            var mockRepository = new Mock<ISqlSongRepository>();
+            mockRepository.Setup(repo => repo.GetSongsWithIds(It.IsAny<List<int>>())).Returns(new List<Song>());
+
+            var songService = new SongService(mockRepository.Object);
+            var songIds = new List<int>();
+
+            // Act
+            var result = songService.GetSongsWithIds(songIds);
+
+            // Assert
+            Assert.Empty(result);
+            mockRepository.Verify(repo => repo.GetSongsWithIds(songIds), Times.Once);
+        }
+        // Test: GetSongsWithIds returns null from repository
+        [Fact]
+        public void GetSongsWithIds_RepositoryReturnsNull_ReturnsNull()
+        {
+            // Arrange
+            var mockRepository = new Mock<ISqlSongRepository>();
+            mockRepository.Setup(repo => repo.GetSongsWithIds(It.IsAny<List<int>>())).Returns((List<Song>)null);
+
+            var songService = new SongService(mockRepository.Object);
+            var songIds = new List<int> { 1, 2 };
+
+            // Act
+            var result = songService.GetSongsWithIds(songIds);
+
+            // Assert
+            Assert.Null(result);
+            mockRepository.Verify(repo => repo.GetSongsWithIds(songIds), Times.Once);
+        }
+
+        // Test: Constructor with default repository
+        [Fact]
+        public void Constructor_WithDefaultRepository_DoesNotThrow()
+        {
+            // Act & Assert
+            var songService = new SongService();
+            Assert.NotNull(songService);
+        }
     }
 }
