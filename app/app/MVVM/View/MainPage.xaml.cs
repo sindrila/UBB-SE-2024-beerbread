@@ -23,7 +23,7 @@ namespace app.src.Main_page
 
         private void LoadSongs()
         {
-            this.recomendedSongs = this.songService.GetSongsWithIds(this.mockAnalyticsAPI.GetRecomendedSongs(5));
+            this.recomendedSongs = this.songService.GetSongsWithIds(this.mockAnalyticsAPI.getRecomendedSongs(5));
             Task.Delay(3);
             this.DisplaySongs(this.recomendedSongs);
         }
@@ -93,7 +93,7 @@ namespace app.src.Main_page
                 stackLayout.Add(imageFrame);
 
                 // add song name to stack layout
-                Label songName = new()
+                Label songName = new ()
                 {
                     Text = song.Name,
                     FontSize = 12,

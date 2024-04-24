@@ -16,7 +16,7 @@
             posibleRecomendedSongs = sqlSongRepository.GetAllSongIds();
         }
 
-        public List<int> GetRecomendedSongs(int nrRecomended)
+        public List<int> getRecomendedSongs(int nrRecomended)
         {
             // get 5 random songs
             List<int> result = new List<int>();

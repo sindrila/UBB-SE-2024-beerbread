@@ -9,8 +9,8 @@
         [Fact]
         public void PlaylistServiceTests_EmptyConstructor()
         {
-            var playlistService = new PlaylistServiceTests();
-            Assert.IsType<PlaylistServiceTests>(playlistService);
+            var playlistService = new PlaylistService();
+            Assert.IsType<PlaylistService>(playlistService);
         }
 
         [Fact]
