@@ -15,6 +15,7 @@
         public User(Account account)
             : base(account)
         {
+            Playlists = new List<Playlist>();
         }
     }
 }
