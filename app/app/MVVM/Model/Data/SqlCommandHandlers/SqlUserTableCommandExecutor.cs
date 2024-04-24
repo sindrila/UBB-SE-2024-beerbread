@@ -47,9 +47,9 @@
                 currentSqlConnection.Close();
                 return likedPlaylist;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Trace.WriteLine(ex.Message);
+                Trace.WriteLine(exception.Message);
                 return null;
             }
         }
@@ -72,9 +72,9 @@
                 currentSqlConnection.Close();
                 return historyPlaylist;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Trace.WriteLine(ex.Message);
+                Trace.WriteLine(exception.Message);
                 return null;
             }
         }
@@ -96,9 +96,9 @@
                 currentSqlConnection.Close();
                 return blockedPlaylist;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Trace.WriteLine(ex.Message);
+                Trace.WriteLine(exception.Message);
                 return null;
             }
         }
@@ -123,9 +123,9 @@
                 reader.Close();
                 currentSqlConnection.Close();
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Trace.WriteLine(ex.Message);
+                Trace.WriteLine(exception.Message);
             }
 
             return userDefinedPlaylists;

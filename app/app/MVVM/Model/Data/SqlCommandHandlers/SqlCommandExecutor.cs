@@ -28,9 +28,9 @@
                 currentSqlConnection.Close();
                 return true;
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                Trace.WriteLine(ex.Message);
+                Trace.WriteLine(exception.Message);
                 return false;
             }
         }

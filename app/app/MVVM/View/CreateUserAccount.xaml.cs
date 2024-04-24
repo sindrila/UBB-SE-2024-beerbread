@@ -1,4 +1,6 @@
-﻿namespace app
+﻿using app.src;
+
+namespace app
 {
     using System;
     using app.MVVM.ViewModel;
@@ -51,7 +53,7 @@
             if (this.createUserAccountViewModel.CreateUserAccount(email, username, password))
             {
                 this.DisplayAlert("Success", "Account created successfully", "OK");
-                this.Navigation.PushAsync(new src.LogIn());
+                this.Navigation.PushAsync(new LogIn());
             }
             else
             {
@@ -65,7 +67,7 @@
 
         private void LoginButton_Clicked(object sender, EventArgs e)
         {
-            src.LogIn logIn = new ();
+            LogIn logIn = new ();
             this.Navigation.PushAsync(logIn);
         }
     }
