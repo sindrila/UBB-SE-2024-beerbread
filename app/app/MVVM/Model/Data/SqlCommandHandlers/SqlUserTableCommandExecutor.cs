@@ -21,7 +21,7 @@
         List<IPlaylist> GetUserDefinedPlaylistsForUserWithId(int userId, int historyPlaylistId, int likedPlaylistId, int blockedPlaylistId);
     }
 
-    internal class SqlUserTableCommandExecutor : SqlCommandExecutor, ISqlUserTableCommandExecutor
+    public class SqlUserTableCommandExecutor : SqlCommandExecutor, ISqlUserTableCommandExecutor
     {
         private readonly SqlConnection currentSqlConnection;
 
