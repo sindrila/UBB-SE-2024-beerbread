@@ -38,8 +38,8 @@ namespace app.src.Main_page
         private void DisplaySongs(List<Song> songs)
         {
             int row = 0;
-            int col = 0;
-            int crt = 0;
+            int column = 0;
+            int counter = 0;
             foreach (Song song in songs)
             {
                 // create song frame
@@ -56,9 +56,9 @@ namespace app.src.Main_page
                 // create stack layout
                 HorizontalStackLayout stackLayout = new ()
                 {
-                    ClassId = crt.ToString(),
+                    ClassId = counter.ToString(),
                 };
-                crt++;
+                counter++;
 
                 // create image frame
                 Frame imageFrame = new ()
@@ -71,19 +71,19 @@ namespace app.src.Main_page
                 };
 
                 // create image
-                string img_path = song.UrlImage;
-                if (img_path == string.Empty)
+                string image_path = song.UrlImage;
+                if (image_path == string.Empty)
                 {
-                    img_path = "song_image.jpeg";
+                    image_path = "song_image.jpeg";
                 }
                 else
                 {
-                    img_path = SongFilesServerPathGenerator.GetPngPath() + img_path;
+                    image_path = SongFilesServerPathGenerator.GetPngPath() + image_path;
                 }
 
                 Image image = new ()
                 {
-                    Source = img_path,
+                    Source = image_path,
                     Margin = new Thickness(-20),
                     Aspect = Aspect.AspectFill,
                 };
@@ -108,25 +108,25 @@ namespace app.src.Main_page
                 stackLayout.Add(songName);
 
                 // add tap gesture recognizer to stack layout
-                TapGestureRecognizer tap_fn = new ();
-                tap_fn.Tapped += (s, e) => this.OnSongTap(s, e);
-                stackLayout.GestureRecognizers.Add(tap_fn);
+                TapGestureRecognizer tapFunctionStackLayout = new ();
+                tapFunctionStackLayout.Tapped += this.OnSongTap;
+                stackLayout.GestureRecognizers.Add(tapFunctionStackLayout);
 
                 songFrame.Content = stackLayout;
 
                 // add song frame to grid
                 this.songsGrid.SetRow(songFrame, row);
-                this.songsGrid.SetColumn(songFrame, col);
+                this.songsGrid.SetColumn(songFrame, column);
                 this.songsGrid.Children.Add(songFrame);
 
-                col++;
-                if (col == 2)
+                column++;
+                if (column == 2)
                 {
                     if (row == 3)
                     {
                         break;
                     }
-                    col = 0;
+                    column = 0;
                     row++;
                 }
             }
