@@ -19,10 +19,10 @@
 
         private void LoadPlaylists()
         {
-            PlaylistService playlistService = new();
+            PlaylistService playlistService = new ();
             List<IPlaylist> playlists = playlistService.GetUserPlaylists(user.Id);
             this.playlists = playlists;
-            int crt = 0;
+            int currentId = 0;
             playlistLayout.Children.Clear();
             foreach (IPlaylist playlist in playlists)
             {
@@ -37,9 +37,9 @@
                 };
                 HorizontalStackLayout stackLayout = new HorizontalStackLayout
                 {
-                    ClassId = crt.ToString()
+                    ClassId = currentId.ToString()
                 };
-                crt++;
+                currentId++;
                 Frame imageFrame = new Frame
                 {
                     CornerRadius = 10,
@@ -47,14 +47,14 @@
                     WidthRequest = 60,
                     BackgroundColor = Color.FromArgb("#FFFFFFFF"),
                 };
-                string imgPath = playlist.ImagePath;
-                if (imgPath != "")
+                string imagePath = playlist.ImagePath;
+                if (imagePath != "")
                 {
-                    imgPath = SongFilesServerPathGenerator.GetPngPath() + imgPath;
+                    imagePath = SongFilesServerPathGenerator.GetPngPath() + imagePath;
                 }
                 Image image = new Image
                 {
-                    Source = imgPath,
+                    Source = imagePath,
                     Aspect = Aspect.AspectFill,
                     Margin = new Thickness(-20),
                 };
@@ -95,13 +95,13 @@
                     WidthRequest = 20,
                 };
                 buttonFrame.Content = details;
-                TapGestureRecognizer tap_fn_img = new();
-                tap_fn_img.Tapped += (s, e) => OnDetailsTap(s, e);
-                details.GestureRecognizers.Add(tap_fn_img);
+                TapGestureRecognizer tapFunctionImage = new();
+                tapFunctionImage.Tapped += OnDetailsTap;
+                details.GestureRecognizers.Add(tapFunctionImage);
 
-                TapGestureRecognizer tap_fn = new();
-                tap_fn.Tapped += (s, e) => OnPlaylistTap(s, e);
-                stackLayout.GestureRecognizers.Add(tap_fn);
+                TapGestureRecognizer tapFunction = new();
+                tapFunction.Tapped += OnPlaylistTap;
+                stackLayout.GestureRecognizers.Add(tapFunction);
 
                 stackLayout.Children.Add(buttonFrame);
                 frame.Content = stackLayout;
