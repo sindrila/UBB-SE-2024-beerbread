@@ -26,5 +26,15 @@
             UrlSong = urlSong;
             UrlImage = urlImage;
         }
+        public Song()
+        {
+            Id = 0;
+            Name = string.Empty;
+            Artist = string.Empty;
+            Likes = 0;
+            TimePlayed = 0;
+            UrlSong = string.Empty;
+            UrlImage = string.Empty;
+        }
     }
 }

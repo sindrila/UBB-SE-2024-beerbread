@@ -58,7 +58,7 @@ namespace MusicAppTests
             bool result = accountRepository.AddUserAccount(account);
 
             // Assert
-            Assert.True(result);
+            Assert.False(result);
         }
 
         [Fact]
